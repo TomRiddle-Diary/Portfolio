@@ -25,27 +25,7 @@ symbols = ['AAPL', 'NVDA', 'MSFT', 'AMZN', 'GOOG', 'GOOGL', 'META', 'TSLA', 'BRK
     'ITW', 'ZTS', 'MAR', 'CL', 'RIO', 'MCK', 'BP', 'SCCO', 'CEG', 'MSTR', 'EMR', 'GD', 'COIN', 'APD',
     'CVS', 'TRI', 'EOG', 'EPD', 'DASH', 'FTNT', 'FDX', 'MMM', 'ORLY', 'CNQ', 'COF', 'SAN', 'CP',
     'GSK', 'EQNR', 'TDG', 'NOC', 'ECL', 'CSX', 'CNI', 'BNS', 'CRH', 'BMO', 'TEAM', 'WMB', 'CARR',
-    'AJG', 'RSG', 'TTD', 'WDAY', 'DEO', 'ET', 'RCL', 'MFG', 'SE', 'OKE', 'BDX', 'ADSK', 'DLR', 'FCX',
-    'TFC', 'NGG', 'AFL', 'NSC', 'SLB', 'HLT', 'ROP', 'KMI', 'PCAR', 'GM', 'CM', 'PSA', 'MET', 'TGT',
-    'TRV', 'CPRT', 'NXPI', 'PCG', 'SPG', 'BK', 'JD', 'SRE', 'GWW', 'SQ', 'MFC', 'NU', 'NTES', 'SNOW',
-    'FICO', 'PSX', 'URI', 'CHTR', 'JCI', 'BBVA', 'AMP', 'ARES', 'ALL', 'DHI', 'AZO', 'MNST', 'ING',
-    'CVNA', 'VST', 'PAYX', 'AEP', 'MPLX', 'ITUB', 'DDOG', 'ROST', 'CMI', 'FANG', 'MPC', 'PWR', 'TRP',
-    'LNG', 'SU', 'O', 'FLUT', 'WCN', 'BCS', 'AXON', 'COR', 'D', 'ODFL', 'HWM', 'MSCI', 'VRT', 'AIG',
-    'E', 'FAST', 'OXY', 'LEN', 'NDAQ', 'NEM', 'KMB', 'KVUE', 'AMX', 'TEL', 'LHX', 'PEG', 'FIS', 'CCI',
-    'PRU', 'HES', 'AME', 'DFS', 'CPNG', 'VLO', 'HLN', 'KDP', 'ALC', 'F', 'EA', 'KR', 'TAK', 'BKR', 'STZ',
-    'NWG', 'FERG', 'CTVA', 'LULU', 'TRGP', 'IR', 'CBRE', 'TCOM', 'GLW', 'HMC', 'VALE', 'EW', 'AEM',
-    'VRSK', 'GRMN', 'DAL', 'XEL', 'OTIS', 'A', 'CTSH', 'IT', 'LVS', 'IMO', 'YUM', 'EXC', 'HBANL', 'KHC',
-    'GEHC', 'VMC', 'MCHP', 'SYY', 'STLA', 'ACGL', 'HUBS', 'HEI', 'GIS', 'WIT', 'ONON', 'VEEV', 'NUE',
-    'IQV', 'ARGX', 'MLM', 'NET', 'HSY', 'EXR', 'RMD', 'MTB', 'IRM', 'SLF', 'HUM', 'IDXX', 'CCEP', 'HIG',
-    'HPQ', 'HBANM', 'DD', 'CCL', 'DB', 'ABEV', 'TPL', 'OWL', 'WAB', 'RBLX', 'ED', 'RJF', 'VICI', 'ROK',
-    'HOOD', 'EIX', 'TTWO', 'ETR', 'AVB', 'CSGP', 'ALNY', 'WTW', 'EFX', 'UAL', 'LYV', 'BRO', 'FITB', 'ZS',
-    'TW', 'CUK', 'WEC', 'ON', 'FCNCA', 'DOW', 'TSCO', 'DXCM', 'XYL', 'DECK', 'ANSS', 'WDS', 'BSBR',
-    'BIDU', 'CNC', 'EBAY', 'FER', 'GOLD', 'GPN', 'IOT', 'KEYS', 'CAH', 'CHT', 'PPG', 'CVE', 'STT', 'SW',
-    'EQR', 'CQP', 'MPWR', 'RKT', 'NVR', 'DOV', 'HBANP', 'WPM', 'BNTX', 'K', 'BNH', 'IX', 'GDDY', 'HAL',
-    'PHM', 'HPE', 'ERIC', 'TROW', 'FTV', 'BR', 'EL', 'CHD', 'ECCF', 'TYL', 'CPAY', 'LYB', 'EQT', 'MTD',
-    'AWK', 'VLTO', 'SYF', 'VTR', 'KB', 'ADM', 'WBD', 'HBAN', 'GIB', 'CCJ', 'DTE', 'TEF', 'ZM', 'BNJ', 'PPL',
-    'WDC', 'SOJC', 'TPG', 'NTAP', 'GFS', 'RDDT', 'AEE', 'DVN', 'BCE', 'CINF', 'SMCI', 'HUBB', 'PHG', 'RYAAY',
-    'WRB', 'LPLA', 'ROL', 'RF', 'CDW']  
+    'AJG', 'RSG', 'TTD', 'WDAY', 'DEO', 'ET', 'RCL', 'MFG', 'SE', 'OKE', 'BDX', 'ADSK', 'DLR', 'FCX',]  
 # Initialize a list to hold data
 data = []
 
@@ -74,6 +54,6 @@ for symbol in symbols:
 df = pd.DataFrame(data)
 
 # Save the DataFrame to a CSV file
-output_file = 'data_1219.csv'
+output_file = 'data_2024_1230.csv'
 df.to_csv(output_file, index=False)
 print(f"Financial data has been successfully saved to '{output_file}'.")
