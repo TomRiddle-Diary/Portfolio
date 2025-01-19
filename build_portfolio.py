@@ -5,29 +5,11 @@ import sys
 from tabulate import tabulate
 
 # Choose company you want
+
+"""# Focus growth
 def select(dataframe):
-    df = dataframe
-    choice = df.nlargest(50, 'Map')
-    choice = choice.nsmallest(20, 'PER')
-    choice = choice.nlargest(5, 'ROE').dropna(subset=['EVToEBITDA','PBR','PER', 'ROE', 'Beta']) 
-    return choice
-
-"""def select(dataframe):
-    df = dataframe
-    choice = df[(df['PER'] < df['PER'].mean()) & (df['PBR'] < df['PBR'].mean())]
-    choice = choice.nlargest(5, 'ROE').dropna(subset=['EVToEBITDA','PBR','PER', 'ROE', 'Beta']) 
-    return choice"""
-
-"""def select(dataframe):
-    df = dataframe
-    choice = df[(df['PER'] < df['PER'].mean()) & (df['PBR'] < df['PBR'].mean())]
-    choice = choice.nlargest(5, 'DividendYield').dropna(subset=['DividendYield', 'EVToEBITDA','PBR','PER', 'ROE', 'Beta']) 
-    return choice"""
-
-"""# Select by each sector
-def select(dataframe):
-    sectors = ['MANUFACTURING', 'FINANCE', 'LIFE SCIENCES', 'TECHNOLOGY', 'ENERGY & TRANSPORTATION',
-               'TRADE & SERVICES', 'REAL ESTATE & CONSTRUCTION']
+    sectors = ['LIFE SCIENCES', 'TECHNOLOGY', 'ENERGY & TRANSPORTATION']
+               
     grouped = dataframe.groupby('Sector')
 
     companys = []
@@ -36,12 +18,56 @@ def select(dataframe):
         if sector not in sectors:
             continue
         else:
-            choice = group[(group['PER'] < group['PER'].mean())]
-            choice = choice.nlargest(1, 'ROE').dropna(subset=['DividendYield', 'EVToEBITDA','PBR','PER', 'ROE', 'Beta'])
+            #choice = group[group['PricePerShare'] < 250]
+            #choice = choice[choice['PER'] < choice['PER'].quantile(0.25)]
+            choice = group[group['PER'] < group['PER'].quantile(0.25)]
+            choice = choice.nlargest(3, 'ROE').dropna(subset=['DividendYield', 'EVToEBITDA','PBR','PER', 'ROE', 'Beta'])
             companys.append(choice)
     
      # Combine all selected companies into a single DataFrame
     return pd.concat(companys) if companys else pd.DataFrame()"""
+
+"""# Focus Income
+def select(dataframe):
+    sectors = ['FINANCE', 'REAL ESTATE & CONSTRUCTION', 'ENERGY & TRANSPORTATION', 'TRADE & SERVICES']
+               
+    grouped = dataframe.groupby('Sector')
+
+    companys = []
+
+    for sector, group in grouped:
+        if sector not in sectors:
+            continue
+        else:
+            choice = group[(group['DividendYield'] > 0.03) & (group['PER'] < group['PER'].mean())]
+            choice = choice[choice['ROE'] > 0.1]
+            choice = choice[choice['Beta'] < 1]
+    
+      # Select top 2 by Dividend Yield
+        selected = choice.nlargest(2, 'DividendYield').dropna(subset=['DividendYield', 'PER', 'ROE', 'Beta'])
+        companys.append(selected)
+
+    return pd.concat(companys) if companys else pd.DataFrame()"""
+
+def select(dataframe):
+    sectors = ['MANUFACTURING', 'TRADE & SERVICES']
+               
+    grouped = dataframe.groupby('Sector')
+
+    companys = []
+
+    for sector, group in grouped:
+        if sector not in sectors:
+            continue
+        else:
+            #choice = group[group['PricePerShare'] < 250]
+            #choice = choice[choice['PER'] < choice['PER'].quantile(0.25)]
+            choice = group[group['PER'] < group['PER'].quantile(0.25)]
+            choice = choice.nlargest(3, 'ROE').dropna(subset=['DividendYield', 'EVToEBITDA','PBR','PER', 'ROE', 'Beta'])
+            companys.append(choice)
+    
+     # Combine all selected companies into a single DataFrame
+    return pd.concat(companys) if companys else pd.DataFrame()
 
 # How torelate aganst risk you are
 def risk_torelence():
@@ -61,7 +87,7 @@ def adjust():
 
 try:
     # Load and clean data
-    df = pd.read_csv('data_2024_1230.csv')
+    df = pd.read_csv('data_2025_0101.csv')
 
     # Change efficient header
     headers = ['Symbol', 'AssetType', 'Name', 'Description', 'CIK', 'Exchange', 'Currency', 'Country', 
@@ -81,8 +107,8 @@ try:
     df['PBR'] = pd.to_numeric(df['PBR'], errors='coerce')
     df['Name'] = df['Name'].str.strip().str.lower()
 
-    # Compare with whole stock
-    """df_show = df[['Beta', 'ROE', 'PER', 'PBR', 'EVToEBITDA']]
+    """# Compare with whole stock
+    df_show = df[['Beta', 'ROE', 'PER', 'PBR', 'EVToEBITDA']]
     print(df_show.describe())"""
     
     # Chose company
@@ -100,18 +126,31 @@ try:
     dividends = {row['Name']: row['DividendYield'] for _, row in choice.iterrows()}
     
     """# You can add your own company stock if you want
-    story_beta = 0.56
-    betas.update({'Monogatari Corp': story_beta})
-    prices.update({'Monogatari Corp': 23.7})  
-    sectors.update({'Monogatari Corp': 'RETAIL'})
-    roes.update({'Monogatari Corp': ''})
-    market_caps.update({'Monogatari Corp': ''})"""
-    
+    name = 'toyota'
+    toyota_beta = 1.09
+    toyota_price = 199
+    toyota_sector = 'MANUFACTURING'
+    toyota_map = 264_960_000_000
+    toyota_roe = 0.1581
+    toyota_per = 9.9
+    toyota_pbr = 1.20
+    toyota_ev = 7.61
+    toyota_div = 0.0261
+
+    betas.update({name: toyota_beta})
+    prices.update({name: toyota_price})  
+    sectors.update({name: toyota_sector})
+    roes.update({name: toyota_roe})
+    market_caps.update({name: toyota_map})
+    pers.update({name: toyota_per})
+    pbrs.update({name: toyota_pbr})
+    evtoebitdas.update({name: toyota_ev})
+    dividends.update({name: toyota_div})"""
 
     # Set up pattern of portfolio
     assets = list(betas.keys())
     portfolios = set()
-    n = 3
+    n = 6
     l = len(assets)
     for r in range(n, len(assets) + 1):
         for subset in combinations(assets, r):
