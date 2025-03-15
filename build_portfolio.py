@@ -27,7 +27,7 @@ def select(dataframe):
      # Combine all selected companies into a single DataFrame
     return pd.concat(companys) if companys else pd.DataFrame()"""
 
-"""# Focus Income
+# Focus Income
 def select(dataframe):
     sectors = ['FINANCE', 'REAL ESTATE & CONSTRUCTION', 'ENERGY & TRANSPORTATION', 'TRADE & SERVICES']
                
@@ -47,8 +47,8 @@ def select(dataframe):
         selected = choice.nlargest(2, 'DividendYield').dropna(subset=['DividendYield', 'PER', 'ROE', 'Beta'])
         companys.append(selected)
 
-    return pd.concat(companys) if companys else pd.DataFrame()"""
-
+    return pd.concat(companys) if companys else pd.DataFrame()
+"""
 def select(dataframe):
     sectors = ['MANUFACTURING', 'TRADE & SERVICES']
                
@@ -67,7 +67,7 @@ def select(dataframe):
             companys.append(choice)
     
      # Combine all selected companies into a single DataFrame
-    return pd.concat(companys) if companys else pd.DataFrame()
+    return pd.concat(companys) if companys else pd.DataFrame()"""
 
 # How torelate aganst risk you are
 def risk_torelence():
@@ -77,12 +77,17 @@ def risk_torelence():
 
 # How much you invest
 def budget():
-    min_bud = 9000
-    max_bud = 10000
+    min_bud = 4000
+    max_bud = 5000
     return min_bud, max_bud
 
+# Define min-size of portfolio
+def min_size():
+    min_asset = 6
+    return min_asset
+
 def adjust():
-    interval = 100
+    interval = 500
     return interval
 
 try:
@@ -150,9 +155,9 @@ try:
     # Set up pattern of portfolio
     assets = list(betas.keys())
     portfolios = set()
-    n = 6
+    n = min_size()
     l = len(assets)
-    for r in range(n, len(assets) + 1):
+    for r in range(n, l + 1):
         for subset in combinations(assets, r):
             portfolios.add(subset) 
 
